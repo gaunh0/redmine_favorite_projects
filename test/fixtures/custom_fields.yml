@@ -1,0 +1,17 @@
+custom_fields_022: 
+  name: Project custom field
+  regexp: ""
+  is_for_all: false
+  is_filter: true
+  type: ProjectCustomField
+  possible_values: 
+  - Value1
+  - Value2
+  - Value3
+  id: 22
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  is_filter: true
+  position: 1

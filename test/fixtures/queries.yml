@@ -1,0 +1,51 @@
+favorite_project_queries_001:
+  id: 1
+  <% if Redmine::VERSION.to_s < '2.4' %>
+  is_public: true
+  <% else %>
+  visibility: 2
+  <% end %>
+  type: FavoriteProjectsQuery
+  name: Public query 1
+  filters: |
+    ---
+    name:
+      :values:
+      - "eCookbook"
+      :operator: "="
+
+  user_id: 1
+favorite_project_queries_002:
+  id: 2
+  <% if Redmine::VERSION.to_s < '2.4' %>
+  is_public: true
+  <% else %>
+  visibility: 2
+  <% end %>
+  type: FavoriteProjectsQuery
+  name: Private query 2
+  filters: |
+    ---
+    name:
+      :values:
+      - "eCookbook"
+      :operator: "!="
+
+  user_id: 4
+favorite_project_queries_003:
+  id: 3
+  <% if Redmine::VERSION.to_s < '2.4' %>
+  is_public: false
+  <% else %>
+  visibility: 0
+  <% end %>
+  type: FavoriteProjectsQuery
+  name: Private query 3
+  filters: |
+    ---
+    name:
+      :values:
+      - "eCookbook"
+      :operator: "="
+
+  user_id: 4

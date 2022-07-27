@@ -1,0 +1,16 @@
+<p class="extended">
+  <label><%= l(:label_favorite_project_tags_plural) %></label>
+  <%= select2_tag 'project[tag_list]',
+                  options_from_collection_for_select(@project.tags, 'name', 'name', @project.tags.map(&:name)),
+                  multiple: true,
+                  style: 'width: 95%;',
+                  url: auto_complete_project_tags_path,
+                  placeholder: l(:label_favorite_project_add_tag),
+                  tags: true %>
+</p>
+
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag :redmine_favorite_projects, :plugin => 'redmine_favorite_projects'  %>
+<% end %>
+

@@ -1,0 +1,41 @@
+<% if @projects.empty? %>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+
+  <div id="projects">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="card" title="<%= project.name %>">
+          <div class="project_card">
+              <% if project.parent.present? %>
+                <div class="parent" onclick="location.href='<%=project_path(project.parent)%>'">
+                  <h4><%= project.parent.name %> </h4>
+                  <div>»</div>
+                </div>
+              <% end %>
+              <div class="title"><%= favorite_tag(project, User.current) %><h4><a href="<%=project_path(project)%>" title="<%= project.name %>"> <%= project.name %></a></h4></div>
+              <p style="margin-bottom: 5px;"></p>
+              <% if project.short_description.present? %>
+                <div class="description">
+                  <p><%= project.short_description %></p>
+                </div>
+              <% end %>
+
+              <div class="tags">
+                <% if project.tags.any? %>
+                <%= project.tags.map{|tag| favorite_project_tag_link(tag.name)}.join(' ').html_safe %>
+                <% end %>
+              </div>
+
+              <div class="people">
+                  <% project.users.each do |user| %>
+                    <span title="<%= user.name %>"><%= avatar(user, :rating=> 'PG', :size => 50) %></span>
+                  <% end %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

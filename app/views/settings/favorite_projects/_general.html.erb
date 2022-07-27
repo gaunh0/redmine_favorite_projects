@@ -1,0 +1,17 @@
+<div class="box">
+  <p>
+    <label><%= l(:label_favorite_project_default_list_style) %></label>
+    <%= select_tag 'settings[default_list_style]', options_for_select([[l(:label_favorite_project_list_cards), "list_cards"], [l(:label_favorite_project_list_list), "list"]],  RedmineFavoriteProjects.default_list_style ) %>
+  </p>
+</div>
+
+<fieldset class="box" id="favorite_projects_box">
+  <legend><%= l(:setting_issue_list_default_columns) %></legend>
+  <%= render_query_columns_selection(
+        FavoriteProjectsQuery.new(:column_names => RedmineFavoriteProjects.settings[:favorite_projects_list_default_columns]),
+        :name => 'settings[favorite_projects_list_default_columns]') %>
+</fieldset>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag :redmine_favorite_projects, :plugin => 'redmine_favorite_projects' %>
+<% end %>

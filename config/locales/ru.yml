@@ -1,0 +1,18 @@
+# Russian strings go here for Rails i18n
+ru:
+  field_go_to: Перейти к модулю
+  label_favorite_projects: Избранные проекты
+  button_projects_edit_query: Редактировать запрос
+  button_projects_delete_query: Удалить запрос
+  permission_manage_public_favorite_project_queries: Управление общими запросами для избранных проектов
+  permission_manage_favorite_project_queries: Управление собственными запросами
+  label_members: Члены
+  label_favorite_project_default_list_style: Вид списка по умолчанию
+  label_favorite_project_list_partial_style: Отображать как
+  label_favorite_project_list_cards: Карточками
+  label_favorite_project_list_list: Таблицей
+  label_favorite_project_tags_plural: Тэги
+  label_favorite_project_edit_tags: Редактировать тэги
+  label_favorite_project_add_tag: "+ добавить тэг"
+
+  field_tags: Тэги

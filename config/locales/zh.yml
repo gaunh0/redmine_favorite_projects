@@ -1,0 +1,20 @@
+# encoding: utf-8
+# Simplified Chinese strings go here for Rails i18n
+# Author: zhoutt
+# Based on file: en.yml
+
+zh:
+  field_go_to: 转到模块
+  label_favorite_projects: 收藏的项目
+  button_projects_edit_query: 编辑查询
+  button_projects_delete_query: 删除查询
+  permission_manage_public_favorite_project_queries: 管理收藏项目公共查询
+  permission_manage_favorite_project_queries: 管理收藏项目查询
+  label_members: 数量
+  label_favorite_project_default_list_style: 默认列表样式
+  label_favorite_project_list_partial_style: 列表样式
+  label_favorite_project_list_cards: 卡片
+  label_favorite_project_list_list: 平铺
+  label_favorite_project_tags_plural: 标签
+  label_favorite_project_edit_tags: 编辑标签
+  label_favorite_project_add_tag: "+ 增加标签"

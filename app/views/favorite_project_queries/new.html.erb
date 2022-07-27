@@ -1,0 +1,6 @@
+<h2><%= l(:label_query_new) %></h2>
+
+<%= form_tag(favorite_project_queries_path) do %>
+  <%= render :partial => 'favorite_project_queries/form', :locals => {:query => @query} %>
+  <%= submit_tag l(:button_save) %>
+<% end %>

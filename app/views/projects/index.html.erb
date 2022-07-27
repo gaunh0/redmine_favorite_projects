@@ -1,0 +1,116 @@
+<div class="contextual">
+  <%= link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') + ' |' if User.current.allowed_to?(:add_project, nil, :global => true) %>
+
+  <% if !@query.new_record? && @query.editable_by?(User.current) %>
+  <%= link_to(l(:button_projects_edit_query), edit_favorite_project_query_path(@query), :class => 'icon icon-edit') + ' |' %>
+  <%= link_to(l(:button_projects_delete_query), favorite_project_query_path(@query), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del') + ' |'  %>
+  <% end %>
+  <%= link_to(l(:label_issue_view_all), { :controller => 'issues' }) + ' |' if User.current.allowed_to?(:view_issues, nil, :global => true) %>
+  <%= link_to(l(:label_overall_spent_time), time_entries_path) + ' |' if User.current.allowed_to?(:view_time_entries, nil, :global => true) %>
+  <%= link_to l(:label_overall_activity),
+                { :controller => 'activities', :action => 'index',
+                  :id => nil } %>
+</div>
+
+<% html_title(@query.new_record? ? l(:label_favorite_projects) : @query.name) %>
+
+<div class="filters">
+  <%= form_tag({:controller => "favorite_projects", :action => "search"}, :method => :get,  :id => "query_form") do %>
+  <%= hidden_field_tag 'set_filter', '1' %>
+  <h2>
+    <%= @query.new_record? ? l(:label_project_plural) : h(@query.name) %>
+    <span class="live_search">
+      <%= text_field_tag(:search, params[:search], :autocomplete => "off", :class => "live_search_field", :placeholder => l(:label_search) ) %>
+    </span>
+  </h2>
+  <script type="text/javascript">
+    jQuery(function($) {
+      // when the #search field changes
+      $("#search").observe_field(2, function() {
+        var form = $("#query_form"); // grab the form wrapping the search bar.
+        var url = form.attr("action");
+        form.find('[name="c[]"] option').each(function(i, elem) {
+          $(elem).attr('selected', true)
+        });
+        var formData = form.serialize();
+        form.find('[name="c[]"] option').each(function(i, elem) {
+          $(elem).attr('selected', false)
+        });
+        $.get(url, formData, function(data) { // perform an AJAX get, the trailing function is what happens on successful get.
+          $("#projects_list").html(data); // replace the "results" div with the result of action taken
+        });
+      });
+    });
+  </script>
+
+  <fieldset id="filters" class="collapsible <%= @query.in_default_state? ? "collapsed" : "" %>">
+    <legend class="icon icon-<%= @query.in_default_state? ? 'collapsed' : 'expended' %>" onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    <div style="<%= @query.in_default_state? ? "display: none;" : "" %>">
+      <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+    </div>
+  </fieldset>
+
+  <fieldset class="collapsible collapsed">
+    <legend class="icon icon-collapsed" onclick="toggleFieldset(this);"><%= l(:label_options) %></legend>
+    <div style="display: none;">
+      <table>
+        <% if favorite_project_list_style == 'list' %>
+        <tr>
+          <td><%= l(:field_column_names) %></td>
+          <td><%= render_query_columns_selection(@query) %></td>
+        </tr>
+        <% end %>
+
+        <tr>
+          <td><label for='favorite_project_list_style'><%= l(:label_favorite_project_list_partial_style) %></label></td>
+          <td><%= select_tag('favorite_project_list_style', options_for_select(favorite_project_list_styles_for_select, favorite_project_list_style)) %></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+
+  <p class="buttons hide-when-print">
+    <%= link_to l(:button_apply), "#", :onclick=>"$('#query_form').submit()", :class => 'icon icon-checked' %>
+    <%= link_to l(:button_clear), { :set_filter => 1 }, :class => 'icon icon-reload'  %>
+    <% if @query.new_record? && User.current.allowed_to?(:manage_favorite_project_queries, nil , :global => true) %>
+    <%= link_to_function l(:button_save),
+                             "$('#query_form').attr('action', '#{ new_favorite_project_query_path }').submit()",
+                             :class => 'icon icon-save' %>
+    <% end %>
+  </p>
+  <% end %>
+</div>
+
+<%= error_messages_for 'query' %>
+
+<% if @query.valid? %>
+<div id="projects_list">
+  <%= render :partial => "projects/#{favorite_project_list_style}" %>
+  <span class="pagination"><%= pagination_links_full @project_pages, @project_count %></span>
+</div>
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+  <span class="my-project"><%= l(:label_favorite_projects) %></span>
+</p>
+<% end %>
+<% end %>
+<% content_for :sidebar do %>
+<div id="queries">
+  <%= render_sidebar_favorite_project_queries('favorite_projects') %>
+</div>
+<div id="tags">
+  <%= render :partial => 'projects/tags_cloud', :object => @tags %>
+</div>
+<% end %>
+
+<% other_formats_links do |f| %>
+<%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= javascript_include_tag :redmine_favorite_projects, :plugin => 'redmine_favorite_projects'  %>
+<%= stylesheet_link_tag :redmine_favorite_projects, :plugin => 'redmine_favorite_projects'  %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>

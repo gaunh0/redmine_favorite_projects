@@ -1,0 +1,61 @@
+== Redmine Favorite Projects plugin changelog
+
+Favorite Projects plugin - Redmine project views improvements
+Copyright (C) 2011-2020  RedmineUP
+https://www.redmineup.com/pages/plugins/favorite-projects
+
+== 2019-07-27 v2.1.1
+
+* Fixed project select bug
+* Added textilizable for project desc
+* Updated zh-tw locale
+* Custom queries moved up to tags in sidebar
+* Added locale for tags
+* Fixed filter styles for projects list
+
+== 2019-04-18 v2.1.0
+
+* Use select2_tag instead of tag-it
+* Redmine 4.0 compatibility
+* Fixed query update bug
+* Fixed empty colums bug
+* New chinese localization
+
+== 2016-08-17 v2.0.3
+
+* Autocomplete case sensitivity fixes
+* Pagination fixes
+* Tags translation fixes
+* Fixed bug with REST API
+
+== 2016-02-25 v2.0.2
+
+* Default columns and view style settings
+* Fixed bug with private projects view
+* Fixed bug with <<me>> member filter
+* Fixed bug with custom field translation
+* Fixed bug with tags autocomplete search
+
+== 2016-02-11 v2.0.1
+
+* Fixed pagination bug
+* Added query title
+
+== 2016-02-10 v2.0.0
+
+* Redmine 3+ support
+* Saved queries
+* Tags
+* Project cards view
+
+== 2013-05-04 v1.0.1
+
+* New live search field
+* Fixed application_helper dependency
+
+== 2013-03-12 v1.0.0
+
+* Redmine 2.1+ support
+* Ajax favorite/unfavorite
+* Ajax searching
+* Filters

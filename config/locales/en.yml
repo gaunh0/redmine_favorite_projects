@@ -1,0 +1,18 @@
+# English strings go here for Rails i18n
+en:
+  field_go_to: Go to module
+  label_favorite_projects: Favorite projects
+  button_projects_edit_query: Edit query
+  button_projects_delete_query: Delete query
+  permission_manage_public_favorite_project_queries: Manage favorite project public queries
+  permission_manage_favorite_project_queries: Manage favorite project queries
+  label_members: Members
+  label_favorite_project_default_list_style: Default list style
+  label_favorite_project_list_partial_style: List style
+  label_favorite_project_list_cards: Cards
+  label_favorite_project_list_list: Table
+  label_favorite_project_tags_plural: Tags
+  label_favorite_project_edit_tags: Edit tags
+  label_favorite_project_add_tag: "+ add tag"
+
+  field_tags: Tags
